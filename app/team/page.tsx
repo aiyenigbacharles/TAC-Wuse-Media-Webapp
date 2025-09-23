@@ -153,40 +153,42 @@ export default function TeamPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.1)] bg-card/30 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.1)] bg-card/30 backdrop-blur-sm sticky top-0 z-50 safe-area-inset-top">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link href="/">
-              <Button variant="ghost" size="sm" className="text-foreground hover:bg-white/10 glow-border-subtle">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Home
+              <Button variant="ghost" size="sm" className="text-foreground hover:bg-white/10 glow-border-subtle mobile-btn">
+                <ArrowLeft className="w-4 h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Back to Home</span>
+                <span className="sm:hidden">Back</span>
               </Button>
             </Link>
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center glow-border">
                 <FileImage className="w-5 h-5 text-primary-foreground" />
               </div>
-              <h1 className="text-xl font-bold text-foreground">Our Media Team</h1>
+              <h1 className="text-lg sm:text-xl font-bold text-foreground">Our Media Team</h1>
             </div>
           </div>
           <Link href="/apply">
             <Button className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25 glow-border">
-              Join Our Team
+              <span className="hidden sm:inline">Join Our Team</span>
+              <span className="sm:hidden">Join</span>
             </Button>
           </Link>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="py-12 sm:py-16 px-4 text-center hero-gradient">
+      <section className="py-8 sm:py-16 px-4 text-center hero-gradient safe-area-inset-x">
         <div className="container mx-auto max-w-4xl">
           <Badge variant="outline" className="mb-4 sm:mb-6 border-primary/30 bg-primary/10 text-primary glow-border">
             Meet Our Team
           </Badge>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-balance mb-4 sm:mb-6 text-foreground">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-balance mb-4 sm:mb-6 text-foreground px-2">
             11 Dedicated Media Professionals
           </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground text-balance mb-6 sm:mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-xl text-muted-foreground text-balance mb-6 sm:mb-8 max-w-2xl mx-auto px-2 leading-relaxed">
             Our passionate team of media professionals work together to create meaningful worship experiences through
             technology and creativity.
           </p>
@@ -194,16 +196,16 @@ export default function TeamPage() {
       </section>
 
       {/* Team Grid */}
-      <section className="py-12 sm:py-16 px-4">
+      <section className="py-8 sm:py-16 px-4 safe-area-inset-x">
         <div className="container mx-auto max-w-7xl">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 px-2 sm:px-0">
             {teamMembers.map((member) => (
               <Card
                 key={member.id}
-                className="bg-card/50 border-white/10 shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 hover:border-white/20 backdrop-blur-sm glow-border hover:glow-border-strong"
+                className="bg-card/50 border-white/10 shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 hover:border-white/20 backdrop-blur-sm glow-border hover:glow-border-strong mobile-card"
               >
                 <CardHeader className="text-center pb-4">
-                  <Avatar className="w-16 h-16 mx-auto mb-3 ring-2 ring-primary/20 glow-border">
+                  <Avatar className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 ring-2 ring-primary/20 glow-border">
                     <AvatarImage src={member.avatar || "/placeholder.svg"} alt={member.name} />
                     <AvatarFallback className="bg-primary/10 text-primary text-sm">
                       {member.name
@@ -212,23 +214,23 @@ export default function TeamPage() {
                         .join("")}
                     </AvatarFallback>
                   </Avatar>
-                  <CardTitle className="text-foreground text-lg">{member.name}</CardTitle>
+                  <CardTitle className="text-foreground text-base sm:text-lg">{member.name}</CardTitle>
                   <Badge variant="outline" className={`mx-auto glow-border text-xs ${getRoleBadgeColor(member.role)}`}>
                     {member.role}
                   </Badge>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent className="space-y-2 sm:space-y-3">
                   <div className="space-y-1">
-                    <div className="flex items-center text-xs text-muted-foreground">
-                      <Mail className="w-3 h-3 mr-2 text-primary flex-shrink-0" />
+                    <div className="flex items-start text-xs text-muted-foreground">
+                      <Mail className="w-3 h-3 mr-1 sm:mr-2 text-primary flex-shrink-0 mt-0.5" />
                       <span className="truncate">{member.email}</span>
                     </div>
-                    <div className="flex items-center text-xs text-muted-foreground">
-                      <Phone className="w-3 h-3 mr-2 text-primary flex-shrink-0" />
+                    <div className="flex items-start text-xs text-muted-foreground">
+                      <Phone className="w-3 h-3 mr-1 sm:mr-2 text-primary flex-shrink-0 mt-0.5" />
                       <span className="truncate">{member.phone}</span>
                     </div>
-                    <div className="flex items-center text-xs text-muted-foreground">
-                      <Calendar className="w-3 h-3 mr-2 text-primary flex-shrink-0" />
+                    <div className="flex items-start text-xs text-muted-foreground">
+                      <Calendar className="w-3 h-3 mr-1 sm:mr-2 text-primary flex-shrink-0 mt-0.5" />
                       Joined{" "}
                       {new Date(member.joinDate).toLocaleDateString("en-US", {
                         year: "numeric",
@@ -239,12 +241,12 @@ export default function TeamPage() {
 
                   <div>
                     <h4 className="text-xs font-medium text-foreground mb-2">Specialties</h4>
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-1 sm:gap-1">
                       {member.specialties.map((specialty, index) => (
                         <Badge
                           key={index}
                           variant="secondary"
-                          className="text-xs bg-primary/10 text-primary border-primary/20 glow-border-subtle px-2 py-0"
+                          className="text-xs bg-primary/10 text-primary border-primary/20 glow-border-subtle px-1.5 sm:px-2 py-0"
                         >
                           {specialty}
                         </Badge>
@@ -259,25 +261,26 @@ export default function TeamPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 px-4 bg-gradient-to-r from-primary/20 to-cyan-500/20 border-t border-white/10">
+      <section className="py-8 sm:py-16 px-4 bg-gradient-to-r from-primary/20 to-cyan-500/20 border-t border-white/10 safe-area-inset-x">
         <div className="container mx-auto max-w-4xl text-center">
-          <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/10 shadow-xl shadow-black/20 glow-border">
-            <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6 ring-1 ring-white/10 glow-border">
-              <Users className="w-8 h-8 text-primary" />
+          <div className="bg-card/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-8 border border-white/10 shadow-xl shadow-black/20 glow-border mx-2 sm:mx-0">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 ring-1 ring-white/10 glow-border">
+              <Users className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
             </div>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4">
+            <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-foreground mb-4">
               Interested in Joining Us?
             </h2>
-            <p className="text-base sm:text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-lg text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed">
               We're always looking for passionate individuals to join our media team. Whether you're experienced or just
               starting out, we'd love to have you contribute to our ministry.
             </p>
             <Link href="/apply">
               <Button
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25 glow-border w-full sm:w-auto"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25 glow-border w-full sm:w-auto mobile-btn"
               >
-                Apply to Join Our Team
+                <span className="hidden sm:inline">Apply to Join Our Team</span>
+                <span className="sm:hidden">Apply Now</span>
               </Button>
             </Link>
           </div>
@@ -285,16 +288,16 @@ export default function TeamPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-card/30 py-6 sm:py-8 px-4">
+      <footer className="border-t border-white/10 bg-card/30 py-4 sm:py-8 px-4 safe-area-inset-bottom">
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             <div className="flex items-center space-x-2">
-              <div className="w-6 h-6 bg-primary rounded flex items-center justify-center glow-border">
-                <FileImage className="w-4 h-4 text-primary-foreground" />
+              <div className="w-5 h-5 sm:w-6 sm:h-6 bg-primary rounded flex items-center justify-center glow-border">
+                <FileImage className="w-3 h-3 sm:w-4 sm:h-4 text-primary-foreground" />
               </div>
-              <span className="font-semibold text-foreground">Church Media System</span>
+              <span className="font-semibold text-foreground text-sm sm:text-base">Church Media System</span>
             </div>
-            <div className="text-sm text-muted-foreground">© 2024 Church Media System. All rights reserved.</div>
+            <div className="text-xs sm:text-sm text-muted-foreground text-center">© 2024 Church Media System. All rights reserved.</div>
           </div>
         </div>
       </footer>

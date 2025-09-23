@@ -74,41 +74,42 @@ export function ScheduleManagement() {
   const [activeView, setActiveView] = useState("list")
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-balance">Schedule Management</h1>
-          <p className="text-muted-foreground">Manage service schedules and team assignments</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-balance">Schedule Management</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">Manage service schedules and team assignments</p>
         </div>
         <CreateEventDialog open={isCreateEventOpen} onOpenChange={setIsCreateEventOpen}>
-          <Button>
-            <Plus className="mr-2 h-4 w-4" />
-            Create Event
+          <Button className="mobile-btn">
+            <Plus className="mr-1 sm:mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Create Event</span>
+            <span className="sm:hidden">Create</span>
           </Button>
         </CreateEventDialog>
       </div>
 
       <Tabs value={activeView} onValueChange={setActiveView} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 max-w-md">
+        <TabsList className="grid w-full grid-cols-2 max-w-xs sm:max-w-md">
           <TabsTrigger value="list" className="flex items-center gap-2">
-            <List className="h-4 w-4" />
-            List View
+            <List className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-sm">List View</span>
           </TabsTrigger>
           <TabsTrigger value="calendar" className="flex items-center gap-2">
-            <CalendarDays className="h-4 w-4" />
-            Calendar View
+            <CalendarDays className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-sm">Calendar View</span>
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="list" className="space-y-4">
           <div className="grid gap-4">
             {upcomingEvents.map((event) => (
-              <Card key={event.id} className="overflow-hidden">
+              <Card key={event.id} className="overflow-hidden mobile-card">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
-                      <CardTitle className="text-lg">{event.title}</CardTitle>
-                      <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                      <CardTitle className="text-base sm:text-lg">{event.title}</CardTitle>
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-1 sm:space-y-0 text-xs sm:text-sm text-muted-foreground">
                         <div className="flex items-center space-x-1">
                           <Calendar className="h-3 w-3" />
                           <span>{event.date}</span>
@@ -123,33 +124,34 @@ export function ScheduleManagement() {
                         </div>
                       </div>
                     </div>
-                    <Badge variant="outline" className={getEventTypeColor(event.type)}>
+                    <Badge variant="outline" className={`${getEventTypeColor(event.type)} text-xs`}>
                       {event.type}
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-3">
+                  <div className="space-y-2 sm:space-y-3">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-sm font-medium flex items-center gap-2">
-                        <Users className="h-4 w-4" />
+                      <h4 className="text-xs sm:text-sm font-medium flex items-center gap-2">
+                        <Users className="h-3 w-3 sm:h-4 sm:w-4" />
                         Team Assignments ({event.assignments.filter((a) => a.assignee).length}/
                         {event.assignments.length})
                       </h4>
-                      <Button variant="outline" size="sm">
-                        Manage Assignments
+                      <Button variant="outline" size="sm" className="mobile-btn text-xs">
+                        <span className="hidden sm:inline">Manage Assignments</span>
+                        <span className="sm:hidden">Manage</span>
                       </Button>
                     </div>
-                    <div className="grid gap-2 sm:grid-cols-2">
+                    <div className="grid gap-2 grid-cols-1 sm:grid-cols-2">
                       {event.assignments.map((assignment, index) => (
-                        <div key={index} className="flex items-center justify-between p-2 border rounded-lg bg-card/50">
-                          <div className="flex items-center space-x-2">
-                            <Badge variant="secondary" className="text-xs">
+                        <div key={index} className="flex flex-col sm:flex-row sm:items-center justify-between p-2 border rounded-lg bg-card/50 space-y-1 sm:space-y-0">
+                          <div className="flex items-center space-x-2 flex-1 min-w-0">
+                            <Badge variant="secondary" className="text-xs flex-shrink-0">
                               {assignment.role}
                             </Badge>
                             {assignment.assignee ? (
-                              <div className="flex items-center space-x-2">
-                                <Avatar className="h-6 w-6">
+                              <div className="flex items-center space-x-1 sm:space-x-2 min-w-0">
+                                <Avatar className="h-5 w-5 sm:h-6 sm:w-6">
                                   <AvatarImage src="/placeholder.svg" alt={assignment.assignee} />
                                   <AvatarFallback className="text-xs">
                                     {assignment.assignee
@@ -158,10 +160,10 @@ export function ScheduleManagement() {
                                       .join("")}
                                   </AvatarFallback>
                                 </Avatar>
-                                <span className="text-sm">{assignment.assignee}</span>
+                                <span className="text-xs sm:text-sm truncate">{assignment.assignee}</span>
                               </div>
                             ) : (
-                              <span className="text-sm text-muted-foreground">Unassigned</span>
+                              <span className="text-xs sm:text-sm text-muted-foreground">Unassigned</span>
                             )}
                           </div>
                           <Badge variant={assignment.confirmed ? "default" : "secondary"} className="text-xs">

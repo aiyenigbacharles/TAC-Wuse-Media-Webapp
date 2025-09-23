@@ -137,30 +137,30 @@ export function MediaPreviewDialog({ file, onClose }: MediaPreviewDialogProps) {
 
   return (
     <Dialog open={!!file} onOpenChange={() => onClose()}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto mx-4 sm:mx-auto">
         <DialogHeader>
-          <DialogTitle className="flex items-center space-x-2">
-            <FileIcon className="h-5 w-5" />
-            <span>{file.name}</span>
+          <DialogTitle className="flex items-center space-x-2 text-lg sm:text-xl">
+            <FileIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="truncate">{file.name}</span>
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-sm">
             {file.type} • {file.fileType.toUpperCase()} • {file.size}
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Preview */}
-          <div className="bg-muted/30 rounded-lg p-4">{renderPreview()}</div>
+          <div className="bg-muted/30 rounded-lg p-3 sm:p-4">{renderPreview()}</div>
 
           {/* File Details */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+            <div className="space-y-3 sm:space-y-4">
               <div>
-                <h3 className="font-medium mb-2">File Information</h3>
-                <div className="space-y-2 text-sm">
+                <h3 className="font-medium mb-2 text-sm sm:text-base">File Information</h3>
+                <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
                   <div className="flex items-center space-x-2">
                     <User className="h-4 w-4 text-muted-foreground" />
-                    <span>Uploaded by {file.uploadedBy}</span>
+                    <span className="truncate">Uploaded by {file.uploadedBy}</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Calendar className="h-4 w-4 text-muted-foreground" />
@@ -170,8 +170,8 @@ export function MediaPreviewDialog({ file, onClose }: MediaPreviewDialogProps) {
               </div>
 
               <div>
-                <h3 className="font-medium mb-2">Categories & Tags</h3>
-                <div className="space-y-2">
+                <h3 className="font-medium mb-2 text-sm sm:text-base">Categories & Tags</h3>
+                <div className="space-y-1 sm:space-y-2">
                   <Badge variant="outline" className={getCategoryColor(file.category)}>
                     {file.category}
                   </Badge>
@@ -187,35 +187,36 @@ export function MediaPreviewDialog({ file, onClose }: MediaPreviewDialogProps) {
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <div>
-                <h3 className="font-medium mb-2">File Type</h3>
+                <h3 className="font-medium mb-2 text-sm sm:text-base">File Type</h3>
                 <Badge variant="outline" className={getFileTypeColor(file.type)}>
                   {file.fileType.toUpperCase()}
                 </Badge>
               </div>
 
               <div>
-                <h3 className="font-medium mb-2">Actions</h3>
-                <div className="flex flex-wrap gap-2">
-                  <Button variant="outline" size="sm">
-                    <Download className="mr-2 h-4 w-4" />
+                <h3 className="font-medium mb-2 text-sm sm:text-base">Actions</h3>
+                <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
+                  <Button variant="outline" size="sm" className="mobile-btn text-xs">
+                    <Download className="mr-1 sm:mr-2 h-4 w-4" />
                     Download
                   </Button>
-                  <Button variant="outline" size="sm">
-                    <Share2 className="mr-2 h-4 w-4" />
+                  <Button variant="outline" size="sm" className="mobile-btn text-xs">
+                    <Share2 className="mr-1 sm:mr-2 h-4 w-4" />
                     Share
                   </Button>
-                  <Button variant="outline" size="sm">
-                    <Edit className="mr-2 h-4 w-4" />
-                    Edit Details
+                  <Button variant="outline" size="sm" className="mobile-btn text-xs">
+                    <Edit className="mr-1 sm:mr-2 h-4 w-4" />
+                    <span className="hidden sm:inline">Edit Details</span>
+                    <span className="sm:hidden">Edit</span>
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-destructive hover:text-destructive bg-transparent"
+                    className="text-destructive hover:text-destructive bg-transparent mobile-btn text-xs"
                   >
-                    <Trash2 className="mr-2 h-4 w-4" />
+                    <Trash2 className="mr-1 sm:mr-2 h-4 w-4" />
                     Delete
                   </Button>
                 </div>

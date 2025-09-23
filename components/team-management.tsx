@@ -94,17 +94,18 @@ export function TeamManagement() {
   })
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-balance">Team Management</h1>
-          <p className="text-muted-foreground">Manage your church media team members and their roles</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-balance">Team Management</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">Manage your church media team members and their roles</p>
         </div>
         <Dialog open={isAddMemberOpen} onOpenChange={setIsAddMemberOpen}>
           <DialogTrigger asChild>
-            <Button>
-              <Plus className="mr-2 h-4 w-4" />
-              Add Member
+            <Button className="mobile-btn">
+              <Plus className="mr-1 sm:mr-2 h-4 w-4" />
+              <span className="hidden sm:inline">Add Member</span>
+              <span className="sm:hidden">Add</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -112,23 +113,23 @@ export function TeamManagement() {
               <DialogTitle>Add New Team Member</DialogTitle>
               <DialogDescription>Invite a new member to join your church media team</DialogDescription>
             </DialogHeader>
-            <div className="space-y-4">
+            <div className="space-y-4 mobile-form">
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
-                <Input id="name" placeholder="Enter full name" />
+                <Input id="name" placeholder="Enter full name" className="mobile-btn" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="Enter email address" />
+                <Input id="email" type="email" placeholder="Enter email address" className="mobile-btn" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
-                <Input id="phone" type="tel" placeholder="Enter phone number" />
+                <Input id="phone" type="tel" placeholder="Enter phone number" className="mobile-btn" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="role">Role</Label>
                 <Select>
-                  <SelectTrigger>
+                  <SelectTrigger className="mobile-btn">
                     <SelectValue placeholder="Select a role" />
                   </SelectTrigger>
                   <SelectContent>
@@ -139,10 +140,10 @@ export function TeamManagement() {
                 </Select>
               </div>
               <div className="flex justify-end space-x-2">
-                <Button variant="outline" onClick={() => setIsAddMemberOpen(false)}>
+                <Button variant="outline" onClick={() => setIsAddMemberOpen(false)} className="mobile-btn">
                   Cancel
                 </Button>
-                <Button onClick={() => setIsAddMemberOpen(false)}>Send Invitation</Button>
+                <Button onClick={() => setIsAddMemberOpen(false)} className="mobile-btn">Send Invitation</Button>
               </div>
             </div>
           </DialogContent>
@@ -150,18 +151,18 @@ export function TeamManagement() {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col gap-3 sm:gap-4">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search team members..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10"
+            className="pl-10 mobile-btn"
           />
         </div>
         <Select value={roleFilter} onValueChange={setRoleFilter}>
-          <SelectTrigger className="w-full sm:w-48">
+          <SelectTrigger className="w-full sm:w-48 mobile-btn">
             <SelectValue placeholder="Filter by role" />
           </SelectTrigger>
           <SelectContent>
@@ -174,13 +175,13 @@ export function TeamManagement() {
       </div>
 
       {/* Team Members Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filteredMembers.map((member) => (
-          <Card key={member.id}>
+          <Card key={member.id} className="mobile-card">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <Avatar className="h-10 w-10">
+                  <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
                     <AvatarImage src={member.avatar || "/placeholder.svg"} alt={member.name} />
                     <AvatarFallback>
                       {member.name
@@ -190,7 +191,7 @@ export function TeamManagement() {
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <CardTitle className="text-base">{member.name}</CardTitle>
+                    <CardTitle className="text-sm sm:text-base">{member.name}</CardTitle>
                     <Badge variant="secondary" className={`text-xs ${getRoleBadgeColor(member.role)}`}>
                       {member.role}
                     </Badge>
@@ -198,7 +199,7 @@ export function TeamManagement() {
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" className="mobile-btn">
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
@@ -215,20 +216,20 @@ export function TeamManagement() {
                 </DropdownMenu>
               </div>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-2 sm:space-y-3">
               <div className="space-y-2">
-                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                <div className="flex items-start space-x-2 text-xs sm:text-sm text-muted-foreground">
                   <Mail className="h-3 w-3" />
-                  <span>{member.email}</span>
+                  <span className="truncate">{member.email}</span>
                 </div>
-                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                <div className="flex items-start space-x-2 text-xs sm:text-sm text-muted-foreground">
                   <Phone className="h-3 w-3" />
-                  <span>{member.phone}</span>
+                  <span className="truncate">{member.phone}</span>
                 </div>
               </div>
 
               <div>
-                <p className="text-sm font-medium mb-1">Assigned Tasks</p>
+                <p className="text-xs sm:text-sm font-medium mb-1">Assigned Tasks</p>
                 <div className="flex flex-wrap gap-1">
                   {member.assignedTasks.map((task, index) => (
                     <Badge key={index} variant="outline" className="text-xs">
@@ -238,8 +239,8 @@ export function TeamManagement() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between text-xs text-muted-foreground">
-                <span>Joined {member.joinDate}</span>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-muted-foreground space-y-1 sm:space-y-0">
+                <span className="truncate">Joined {member.joinDate}</span>
                 <Badge variant={member.status === "active" ? "default" : "secondary"} className="text-xs">
                   {member.status}
                 </Badge>
@@ -251,10 +252,11 @@ export function TeamManagement() {
 
       {filteredMembers.length === 0 && (
         <Card>
-          <CardContent className="flex flex-col items-center justify-center py-12">
-            <p className="text-muted-foreground mb-4">No team members found matching your criteria</p>
+          <CardContent className="flex flex-col items-center justify-center py-8 sm:py-12">
+            <p className="text-muted-foreground mb-4 text-center text-sm sm:text-base">No team members found matching your criteria</p>
             <Button
               variant="outline"
+              className="mobile-btn"
               onClick={() => {
                 setSearchTerm("")
                 setRoleFilter("all")

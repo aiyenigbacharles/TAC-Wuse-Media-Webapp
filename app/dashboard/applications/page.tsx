@@ -57,25 +57,25 @@ export default function ApplicationsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6 p-3 sm:p-0">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Media Team Applications</h1>
-          <p className="text-muted-foreground">Review and manage applications to join the media team</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-foreground">Media Team Applications</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">Review and manage applications to join the media team</p>
         </div>
       </div>
 
       {/* Filter Buttons */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1 sm:gap-2">
         {["pending", "under_review", "approved", "rejected", "all"].map((status) => (
           <Button
             key={status}
             variant={filter === status ? "default" : "outline"}
             size="sm"
+            className="mobile-btn text-xs sm:text-sm"
             onClick={() => setFilter(status)}
-            className="capitalize"
           >
-            {status.replace("_", " ")}
+            <span className="capitalize">{status.replace("_", " ")}</span>
           </Button>
         ))}
       </div>
@@ -83,24 +83,24 @@ export default function ApplicationsPage() {
       {/* Applications List */}
       {loading ? (
         <div className="flex items-center justify-center py-12">
-          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          <Loader2 className="w-6 h-6 sm:w-8 sm:h-8 animate-spin text-primary" />
         </div>
       ) : applications.length === 0 ? (
-        <Card className="bg-card/50 border-white/10 glow-border">
-          <CardContent className="py-12 text-center">
-            <Users className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground">No applications found for the selected filter.</p>
+        <Card className="bg-card/50 border-white/10 glow-border mobile-card">
+          <CardContent className="py-8 sm:py-12 text-center">
+            <Users className="w-10 h-10 sm:w-12 sm:h-12 text-muted-foreground mx-auto mb-4" />
+            <p className="text-muted-foreground text-sm sm:text-base">No applications found for the selected filter.</p>
           </CardContent>
         </Card>
       ) : (
         <div className="grid gap-4">
           {applications.map((application) => (
-            <Card key={application.id} className="bg-card/50 border-white/10 glow-border">
+            <Card key={application.id} className="bg-card/50 border-white/10 glow-border mobile-card">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div>
-                    <CardTitle className="text-lg text-foreground">{application.full_name}</CardTitle>
-                    <CardDescription className="flex items-center gap-2 mt-1">
+                    <CardTitle className="text-base sm:text-lg text-foreground">{application.full_name}</CardTitle>
+                    <CardDescription className="flex items-center gap-2 mt-1 text-xs sm:text-sm">
                       <Calendar className="w-4 h-4" />
                       {new Date(application.created_at).toLocaleDateString()}
                     </CardDescription>
@@ -110,23 +110,23 @@ export default function ApplicationsPage() {
                   </Badge>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-center gap-2">
+              <CardContent className="space-y-3 sm:space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="flex items-start gap-2">
                     <Phone className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-sm text-foreground">{application.phone_number}</span>
+                    <span className="text-xs sm:text-sm text-foreground truncate">{application.phone_number}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-start gap-2">
                     <Briefcase className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-sm text-foreground">{application.occupation}</span>
+                    <span className="text-xs sm:text-sm text-foreground truncate">{application.occupation}</span>
                   </div>
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <Code className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-sm font-medium text-foreground">Technical Skills:</span>
+                    <span className="text-xs sm:text-sm font-medium text-foreground">Technical Skills:</span>
                   </div>
-                  <p className="text-sm text-muted-foreground bg-background/50 rounded-lg p-3 border border-white/10">
+                  <p className="text-xs sm:text-sm text-muted-foreground bg-background/50 rounded-lg p-3 border border-white/10 leading-relaxed">
                     {application.technical_skills}
                   </p>
                 </div>

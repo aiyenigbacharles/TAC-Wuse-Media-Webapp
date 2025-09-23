@@ -105,36 +105,36 @@ export function ScheduleCalendar({ events }: ScheduleCalendarProps) {
   }
 
   return (
-    <Card>
+    <Card className="mobile-card">
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
-            <Calendar className="h-5 w-5" />
+          <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+            <Calendar className="h-4 w-4 sm:h-5 sm:w-5" />
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
           </CardTitle>
           <div className="flex items-center space-x-2">
-            <Button variant="outline" size="sm" onClick={() => navigateMonth("prev")}>
-              <ChevronLeft className="h-4 w-4" />
+            <Button variant="outline" size="sm" onClick={() => navigateMonth("prev")} className="mobile-btn">
+              <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
-            <Button variant="outline" size="sm" onClick={() => navigateMonth("next")}>
-              <ChevronRight className="h-4 w-4" />
+            <Button variant="outline" size="sm" onClick={() => navigateMonth("next")} className="mobile-btn">
+              <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
           </div>
         </div>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-7 gap-1 mb-4">
+        <div className="grid grid-cols-7 gap-0.5 sm:gap-1 mb-3 sm:mb-4">
           {weekDays.map((day) => (
-            <div key={day} className="p-2 text-center text-sm font-medium text-muted-foreground">
+            <div key={day} className="p-1 sm:p-2 text-center text-xs sm:text-sm font-medium text-muted-foreground">
               {day}
             </div>
           ))}
         </div>
 
-        <div className="grid grid-cols-7 gap-1">
+        <div className="grid grid-cols-7 gap-0.5 sm:gap-1">
           {calendarDays.map((day, index) => {
             if (day === null) {
-              return <div key={index} className="p-2 h-24" />
+              return <div key={index} className="p-1 sm:p-2 h-16 sm:h-24" />
             }
 
             const dayEvents = getEventsForDate(day)
@@ -143,23 +143,23 @@ export function ScheduleCalendar({ events }: ScheduleCalendarProps) {
             return (
               <div
                 key={day}
-                className={`p-2 h-24 border rounded-lg relative overflow-hidden ${
+                className={`p-1 sm:p-2 h-16 sm:h-24 border rounded-md sm:rounded-lg relative overflow-hidden ${
                   isTodayDate ? "bg-primary/5 border-primary/20" : "bg-card hover:bg-accent/50"
                 }`}
               >
-                <div className={`text-sm font-medium mb-1 ${isTodayDate ? "text-primary" : ""}`}>{day}</div>
+                <div className={`text-xs sm:text-sm font-medium mb-0.5 sm:mb-1 ${isTodayDate ? "text-primary" : ""}`}>{day}</div>
                 <div className="space-y-1">
-                  {dayEvents.slice(0, 2).map((event) => (
+                  {dayEvents.slice(0, 1).map((event) => (
                     <div
                       key={event.id}
-                      className={`text-xs p-1 rounded truncate ${getEventTypeColor(event.type)}`}
+                      className={`text-xs p-0.5 sm:p-1 rounded truncate ${getEventTypeColor(event.type)}`}
                       title={`${event.title} - ${event.time}`}
                     >
                       {event.title}
                     </div>
                   ))}
-                  {dayEvents.length > 2 && (
-                    <div className="text-xs text-muted-foreground">+{dayEvents.length - 2} more</div>
+                  {dayEvents.length > 1 && (
+                    <div className="text-xs text-muted-foreground">+{dayEvents.length - 1} more</div>
                   )}
                 </div>
               </div>
@@ -169,8 +169,8 @@ export function ScheduleCalendar({ events }: ScheduleCalendarProps) {
 
         {/* Event Legend */}
         <div className="mt-6 pt-4 border-t">
-          <h4 className="text-sm font-medium mb-3">Event Types</h4>
-          <div className="flex flex-wrap gap-2">
+          <h4 className="text-xs sm:text-sm font-medium mb-2 sm:mb-3">Event Types</h4>
+          <div className="flex flex-wrap gap-1 sm:gap-2">
             <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
               Service
             </Badge>

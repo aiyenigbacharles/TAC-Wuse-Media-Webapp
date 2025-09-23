@@ -53,16 +53,16 @@ export function CreateRunSheetDialog({ children, open, onOpenChange }: CreateRun
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-w-md mx-4 sm:mx-auto">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <FileText className="h-5 w-5" />
+          <DialogTitle className="flex items-center gap-2 text-lg sm:text-xl">
+            <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
             Create New Run Sheet
           </DialogTitle>
-          <DialogDescription>Set up a new service run sheet for your team</DialogDescription>
+          <DialogDescription className="text-sm">Set up a new service run sheet for your team</DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4 mobile-form">
           <div className="space-y-2">
             <Label htmlFor="title">Service Title</Label>
             <Input
@@ -70,10 +70,11 @@ export function CreateRunSheetDialog({ children, open, onOpenChange }: CreateRun
               placeholder="Sunday Morning Service"
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              className="mobile-btn"
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div className="space-y-2">
               <Label htmlFor="serviceDate">Service Date</Label>
               <Input
@@ -81,6 +82,7 @@ export function CreateRunSheetDialog({ children, open, onOpenChange }: CreateRun
                 type="date"
                 value={formData.serviceDate}
                 onChange={(e) => setFormData({ ...formData, serviceDate: e.target.value })}
+                className="mobile-btn"
               />
             </div>
             <div className="space-y-2">
@@ -90,6 +92,7 @@ export function CreateRunSheetDialog({ children, open, onOpenChange }: CreateRun
                 type="time"
                 value={formData.serviceTime}
                 onChange={(e) => setFormData({ ...formData, serviceTime: e.target.value })}
+                className="mobile-btn"
               />
             </div>
           </div>
@@ -97,7 +100,7 @@ export function CreateRunSheetDialog({ children, open, onOpenChange }: CreateRun
           <div className="space-y-2">
             <Label htmlFor="category">Category</Label>
             <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
-              <SelectTrigger>
+              <SelectTrigger className="mobile-btn">
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
               <SelectContent>
@@ -112,7 +115,7 @@ export function CreateRunSheetDialog({ children, open, onOpenChange }: CreateRun
           <div className="space-y-2">
             <Label htmlFor="template">Start from Template (Optional)</Label>
             <Select value={formData.template} onValueChange={(value) => setFormData({ ...formData, template: value })}>
-              <SelectTrigger>
+              <SelectTrigger className="mobile-btn">
                 <SelectValue placeholder="Choose a template" />
               </SelectTrigger>
               <SelectContent>
@@ -131,16 +134,17 @@ export function CreateRunSheetDialog({ children, open, onOpenChange }: CreateRun
               placeholder="Additional notes about this service..."
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              rows={3}
+              rows={2}
+              className="mobile-btn"
             />
           </div>
         </div>
 
-        <div className="flex justify-end space-x-2 pt-4">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+        <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2 pt-4">
+          <Button variant="outline" onClick={() => onOpenChange(false)} className="mobile-btn">
             Cancel
           </Button>
-          <Button onClick={handleSubmit}>Create Run Sheet</Button>
+          <Button onClick={handleSubmit} className="mobile-btn">Create Run Sheet</Button>
         </div>
       </DialogContent>
     </Dialog>

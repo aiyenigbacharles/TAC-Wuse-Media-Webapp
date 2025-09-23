@@ -123,46 +123,52 @@ export default function ApplyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background safe-area-inset">
       {/* Header */}
-      <header className="border-b border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.1)] bg-card/30 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.1)] bg-card/30 backdrop-blur-sm sticky top-0 z-50 safe-area-inset-top">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <ArrowLeft className="w-5 h-5 text-muted-foreground" />
-            <span className="text-muted-foreground">Back to Home</span>
+          <Link href="/" className="flex items-center space-x-1 sm:space-x-2 hover:opacity-80 transition-opacity">
+            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
+            <span className="text-muted-foreground text-sm sm:text-base">
+              <span className="hidden sm:inline">Back to Home</span>
+              <span className="sm:hidden">Back</span>
+            </span>
           </Link>
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center glow-border">
-              <Users className="w-5 h-5 text-primary-foreground" />
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-primary rounded-lg flex items-center justify-center glow-border">
+              <Users className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
             </div>
-            <h1 className="text-xl font-bold text-foreground">Join Media Team</h1>
+            <h1 className="text-lg sm:text-xl font-bold text-foreground">
+              <span className="hidden sm:inline">Join Media Team</span>
+              <span className="sm:hidden">Join Team</span>
+            </h1>
           </div>
         </div>
       </header>
 
       {/* Application Form */}
-      <div className="py-8 sm:py-12 px-4">
+      <div className="py-6 sm:py-12 px-4 safe-area-inset-x">
         <div className="container mx-auto max-w-2xl">
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 ring-1 ring-white/10 glow-border">
-              <Users className="w-8 h-8 text-primary" />
+          <div className="text-center mb-6 sm:mb-8 px-2">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 ring-1 ring-white/10 glow-border">
+              <Users className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Apply to Join Our Media Team</h1>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+            <h1 className="text-xl sm:text-3xl font-bold text-foreground mb-4 leading-tight">Apply to Join Our Media Team</h1>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
               We're excited about your interest in serving through media ministry. Please fill out the form below to get
               started.
             </p>
           </div>
 
-          <Card className="bg-card/50 border-white/10 shadow-xl shadow-black/20 backdrop-blur-sm glow-border">
+          <Card className="bg-card/50 border-white/10 shadow-xl shadow-black/20 backdrop-blur-sm glow-border mx-2 sm:mx-0 mobile-card">
             <CardHeader>
-              <CardTitle className="text-xl text-foreground">Application Form</CardTitle>
+              <CardTitle className="text-lg sm:text-xl text-foreground">Application Form</CardTitle>
               <CardDescription className="text-muted-foreground">
                 Tell us about yourself and your technical background
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 mobile-form">
                 <div className="space-y-2">
                   <Label htmlFor="fullName" className="text-foreground font-medium">
                     Full Name *
@@ -173,7 +179,7 @@ export default function ApplyPage() {
                     placeholder="Enter your full name"
                     value={formData.fullName}
                     onChange={(e) => handleInputChange("fullName", e.target.value)}
-                    className={`bg-background/50 border-white/20 text-foreground placeholder:text-muted-foreground focus:border-primary/50 glow-border-subtle ${
+                    className={`bg-background/50 border-white/20 text-foreground placeholder:text-muted-foreground focus:border-primary/50 glow-border-subtle mobile-btn ${
                       errors.fullName ? "border-red-500/50" : ""
                     }`}
                     disabled={isSubmitting}
@@ -191,7 +197,7 @@ export default function ApplyPage() {
                     placeholder="e.g., +1 (555) 123-4567"
                     value={formData.phoneNumber}
                     onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
-                    className={`bg-background/50 border-white/20 text-foreground placeholder:text-muted-foreground focus:border-primary/50 glow-border-subtle ${
+                    className={`bg-background/50 border-white/20 text-foreground placeholder:text-muted-foreground focus:border-primary/50 glow-border-subtle mobile-btn ${
                       errors.phoneNumber ? "border-red-500/50" : ""
                     }`}
                     disabled={isSubmitting}
@@ -210,7 +216,7 @@ export default function ApplyPage() {
                     placeholder="e.g., Software Engineer, Student, Teacher"
                     value={formData.occupation}
                     onChange={(e) => handleInputChange("occupation", e.target.value)}
-                    className={`bg-background/50 border-white/20 text-foreground placeholder:text-muted-foreground focus:border-primary/50 glow-border-subtle ${
+                    className={`bg-background/50 border-white/20 text-foreground placeholder:text-muted-foreground focus:border-primary/50 glow-border-subtle mobile-btn ${
                       errors.occupation ? "border-red-500/50" : ""
                     }`}
                     disabled={isSubmitting}
@@ -227,7 +233,7 @@ export default function ApplyPage() {
                     placeholder="Please describe your technical skills, experience with audio/video equipment, software knowledge, or any relevant experience you have..."
                     value={formData.technicalSkills}
                     onChange={(e) => handleInputChange("technicalSkills", e.target.value)}
-                    className={`bg-background/50 border-white/20 text-foreground placeholder:text-muted-foreground focus:border-primary/50 glow-border-subtle min-h-[120px] resize-none ${
+                    className={`bg-background/50 border-white/20 text-foreground placeholder:text-muted-foreground focus:border-primary/50 glow-border-subtle min-h-[100px] sm:min-h-[120px] resize-none mobile-btn ${
                       errors.technicalSkills ? "border-red-500/50" : ""
                     }`}
                     disabled={isSubmitting}
@@ -248,7 +254,7 @@ export default function ApplyPage() {
 
                 <Button
                   type="submit"
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25 glow-border"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25 glow-border mobile-btn"
                   disabled={isSubmitting}
                 >
                   {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
