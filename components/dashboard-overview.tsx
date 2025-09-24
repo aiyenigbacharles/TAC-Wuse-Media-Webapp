@@ -316,35 +316,6 @@ export function DashboardOverview() {
           </div>
         </CardContent>
       </Card>
-
-      {/* Church Services Gallery */}
-      <div className="mt-8">
-        <h2 className="text-2xl font-bold text-foreground mb-4">Church Services Gallery</h2>
-        <div className="relative overflow-hidden rounded-lg border border-border/50 bg-card/30">
-          <div className="flex animate-scroll">
-            <img
-              src="/church-worship-service-with-congregation-singing.jpg"
-              alt="Worship Service"
-              className="w-80 h-48 object-cover flex-shrink-0"
-            />
-            <img
-              src="/church-media-team-operating-cameras-and-sound-equi.jpg"
-              alt="Media Team"
-              className="w-80 h-48 object-cover flex-shrink-0"
-            />
-            <img
-              src="/church-live-streaming-setup-with-multiple-cameras.jpg"
-              alt="Live Streaming"
-              className="w-80 h-48 object-cover flex-shrink-0"
-            />
-            <img
-              src="/church-christmas-service-with-beautiful-stage-ligh.jpg"
-              alt="Christmas Service"
-              className="w-80 h-48 object-cover flex-shrink-0"
-            />
-          </div>
-        </div>
-      </div>
     </div>
   )
 }

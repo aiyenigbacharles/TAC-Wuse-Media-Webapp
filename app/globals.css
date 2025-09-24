@@ -1,83 +1,77 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Light theme - improved contrast and readability */
-  --background: oklch(0.99 0.005 264);
-  --foreground: oklch(0.15 0.02 264);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.02 264);
+  --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.02 264);
-  --primary: oklch(0.55 0.18 264);
-  --primary-foreground: oklch(0.99 0.005 264);
-  --secondary: oklch(0.96 0.01 264);
-  --secondary-foreground: oklch(0.25 0.02 264);
-  --muted: oklch(0.96 0.01 264);
-  --muted-foreground: oklch(0.55 0.02 264);
-  --accent: oklch(0.94 0.02 264);
-  --accent-foreground: oklch(0.25 0.02 264);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0.005 27.325);
-  /* Fixed light mode borders to use proper gray instead of white */
-  --border: oklch(0.85 0.01 264);
-  --input: oklch(0.92 0.01 264);
-  --ring: oklch(0.55 0.18 264);
-  --chart-1: oklch(0.55 0.18 264);
-  --chart-2: oklch(0.6 0.15 220);
-  --chart-3: oklch(0.65 0.12 180);
-  --chart-4: oklch(0.7 0.1 140);
-  --chart-5: oklch(0.75 0.08 100);
-  --radius: 0.75rem;
-  /* Improved sidebar colors for light mode */
-  --sidebar: oklch(0.98 0.005 264);
-  --sidebar-foreground: oklch(0.15 0.02 264);
-  --sidebar-primary: oklch(0.55 0.18 264);
-  --sidebar-primary-foreground: oklch(0.99 0.005 264);
-  --sidebar-accent: oklch(0.94 0.02 264);
-  --sidebar-accent-foreground: oklch(0.25 0.02 264);
-  --sidebar-border: oklch(0.85 0.01 264);
-  --sidebar-ring: oklch(0.55 0.18 264);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
-/* Updated to Feathers-inspired dark theme with navy blue background and cyan accents */
 .dark {
-  /* Dark theme - Feathers inspired */
-  --background: oklch(0.08 0.02 240); /* Deep navy blue */
-  --foreground: oklch(0.95 0.005 240); /* Light text */
-  --card: oklch(0.12 0.02 240); /* Slightly lighter navy for cards */
-  --card-foreground: oklch(0.95 0.005 240);
-  --popover: oklch(0.12 0.02 240);
-  --popover-foreground: oklch(0.95 0.005 240);
-  --primary: oklch(0.7 0.15 200); /* Cyan accent color */
-  --primary-foreground: oklch(0.08 0.02 240);
-  --secondary: oklch(0.15 0.02 240); /* Darker navy for secondary elements */
-  --secondary-foreground: oklch(0.95 0.005 240);
-  --muted: oklch(0.15 0.02 240);
-  --muted-foreground: oklch(0.65 0.02 240); /* Muted text */
-  --accent: oklch(0.18 0.02 240); /* Subtle accent background */
-  --accent-foreground: oklch(0.95 0.005 240);
-  --destructive: oklch(0.55 0.2 15); /* Red for destructive actions */
-  --destructive-foreground: oklch(0.95 0.005 240);
-  --border: oklch(0.95 0.005 240); /* White borders for visibility */
-  --input: oklch(0.15 0.02 240); /* Input backgrounds */
-  --ring: oklch(0.7 0.15 200); /* Cyan focus ring */
-  --chart-1: oklch(0.7 0.15 200);
-  --chart-2: oklch(0.65 0.12 180);
-  --chart-3: oklch(0.6 0.1 160);
-  --chart-4: oklch(0.55 0.08 140);
-  --chart-5: oklch(0.5 0.06 120);
-  --radius: 0.75rem;
-  --sidebar: oklch(0.1 0.02 240);
-  --sidebar-foreground: oklch(0.95 0.005 240);
-  --sidebar-primary: oklch(0.7 0.15 200);
-  --sidebar-primary-foreground: oklch(0.08 0.02 240);
-  --sidebar-accent: oklch(0.18 0.02 240);
-  --sidebar-accent-foreground: oklch(0.95 0.005 240);
-  --sidebar-border: oklch(0.95 0.005 240); /* White sidebar borders */
-  --sidebar-ring: oklch(0.7 0.15 200);
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
 }
 
 @theme inline {
@@ -128,151 +122,4 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-/* Added custom gradient backgrounds for hero sections */
-.hero-gradient {
-  background: linear-gradient(135deg, oklch(0.08 0.02 240) 0%, oklch(0.12 0.03 220) 50%, oklch(0.08 0.02 240) 100%);
-}
-
-.card-gradient {
-  background: linear-gradient(135deg, oklch(0.12 0.02 240) 0%, oklch(0.15 0.03 230) 100%);
-}
-
-/* Added glowing border utilities for dark mode visibility */
-.glow-border {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.glow-border-strong {
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-.glow-border-subtle {
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.grid-glow {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-.card-glow {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.card-glow:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-}
-
-/* Enhanced focus states for better accessibility */
-.glow-border:focus-within,
-.glow-border-strong:focus-within {
-  border-color: rgba(112, 207, 255, 0.5);
-  box-shadow: 0 0 20px rgba(112, 207, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* Added smooth transitions for better UX */
-.glow-border,
-.glow-border-strong,
-.glow-border-subtle {
-  transition: all 0.2s ease-in-out;
-}
-
-/* Mobile optimizations */
-@media (max-width: 640px) {
-  .hero-gradient {
-    background: linear-gradient(135deg, oklch(0.08 0.02 240) 0%, oklch(0.12 0.03 220) 100%);
-  }
-
-  .glow-border,
-  .glow-border-strong,
-  .glow-border-subtle {
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-  }
-}
-
-/* Loading state animations */
-@keyframes pulse-glow {
-  0%,
-  100% {
-    box-shadow: 0 0 10px rgba(112, 207, 255, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(112, 207, 255, 0.2);
-  }
-}
-
-.loading-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* Improved button hover states */
-.btn-glow:hover {
-  box-shadow: 0 0 15px rgba(112, 207, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transform: translateY(-1px);
-}
-
-.btn-responsive {
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: center;
-}
-
-.btn-responsive:hover {
-  transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.btn-responsive:active {
-  transform: translateY(0) scale(0.98);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Added light mode specific overrides for better contrast */
-:root:not(.dark) .glow-border {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-:root:not(.dark) .glow-border-strong {
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-:root:not(.dark) .glow-border-subtle {
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.7);
-}
-
-:root:not(.dark) .card-glow {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-}
-
-:root:not(.dark) .card-glow:hover {
-  border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
-}
-
-:root:not(.dark) .btn-glow:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  transform: translateY(-1px);
-}
-
-:root:not(.dark) .btn-responsive:hover {
-  transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-:root:not(.dark) .btn-responsive:active {
-  transform: translateY(0) scale(0.98);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
