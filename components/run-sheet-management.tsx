@@ -122,113 +122,116 @@ export function RunSheetManagement() {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-balance">Run Sheets</h1>
-          <p className="text-muted-foreground">Create and manage service run sheets for your team</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-balance">Run Sheets</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">Create and manage service run sheets for your team</p>
         </div>
         <CreateRunSheetDialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-          <Button>
-            <Plus className="mr-2 h-4 w-4" />
-            Create Run Sheet
+          <Button className="mobile-btn">
+            <Plus className="mr-1 sm:mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Create Run Sheet</span>
+            <span className="sm:hidden">Create</span>
           </Button>
         </CreateRunSheetDialog>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Run Sheets</CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2 p-3 sm:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Total Run Sheets</CardTitle>
+            <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{runSheets.length}</div>
+          <CardContent className="p-3 sm:p-6 pt-0">
+            <div className="text-xl sm:text-2xl font-bold">{runSheets.length}</div>
             <p className="text-xs text-muted-foreground">All time</p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Published</CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2 p-3 sm:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Published</CardTitle>
+            <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{runSheets.filter((s) => s.status === "published").length}</div>
+          <CardContent className="p-3 sm:p-6 pt-0">
+            <div className="text-xl sm:text-2xl font-bold">{runSheets.filter((s) => s.status === "published").length}</div>
             <p className="text-xs text-muted-foreground">Ready for services</p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">In Review</CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2 p-3 sm:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">In Review</CardTitle>
+            <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{runSheets.filter((s) => s.status === "review").length}</div>
+          <CardContent className="p-3 sm:p-6 pt-0">
+            <div className="text-xl sm:text-2xl font-bold">{runSheets.filter((s) => s.status === "review").length}</div>
             <p className="text-xs text-muted-foreground">Pending approval</p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Drafts</CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2 p-3 sm:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Drafts</CardTitle>
+            <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{runSheets.filter((s) => s.status === "draft").length}</div>
+          <CardContent className="p-3 sm:p-6 pt-0">
+            <div className="text-xl sm:text-2xl font-bold">{runSheets.filter((s) => s.status === "draft").length}</div>
             <p className="text-xs text-muted-foreground">Work in progress</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col gap-3 sm:gap-4">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search run sheets..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10"
+            className="pl-10 mobile-btn"
           />
         </div>
-        <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-full sm:w-48">
-            <SelectValue placeholder="All Statuses" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Statuses</SelectItem>
-            <SelectItem value="draft">Draft</SelectItem>
-            <SelectItem value="review">In Review</SelectItem>
-            <SelectItem value="published">Published</SelectItem>
-            <SelectItem value="archived">Archived</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-          <SelectTrigger className="w-full sm:w-48">
-            <SelectValue placeholder="All Categories" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
-            <SelectItem value="sunday-service">Sunday Service</SelectItem>
-            <SelectItem value="prayer-meeting">Prayer Meeting</SelectItem>
-            <SelectItem value="youth-service">Youth Service</SelectItem>
-            <SelectItem value="special-event">Special Event</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:gap-4">
+          <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <SelectTrigger className="w-full sm:w-48 mobile-btn">
+              <SelectValue placeholder="All Statuses" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Statuses</SelectItem>
+              <SelectItem value="draft">Draft</SelectItem>
+              <SelectItem value="review">In Review</SelectItem>
+              <SelectItem value="published">Published</SelectItem>
+              <SelectItem value="archived">Archived</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+            <SelectTrigger className="w-full sm:w-48 mobile-btn">
+              <SelectValue placeholder="All Categories" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Categories</SelectItem>
+              <SelectItem value="sunday-service">Sunday Service</SelectItem>
+              <SelectItem value="prayer-meeting">Prayer Meeting</SelectItem>
+              <SelectItem value="youth-service">Youth Service</SelectItem>
+              <SelectItem value="special-event">Special Event</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       {/* Run Sheets Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filteredRunSheets.map((sheet) => (
-          <Card key={sheet.id} className="hover:shadow-lg transition-shadow">
+          <Card key={sheet.id} className="hover:shadow-lg transition-shadow mobile-card">
             <CardHeader className="pb-3">
               <div className="flex items-start justify-between">
                 <div className="space-y-1 flex-1">
-                  <CardTitle className="text-lg line-clamp-2">{sheet.title}</CardTitle>
-                  <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                  <CardTitle className="text-base sm:text-lg line-clamp-2">{sheet.title}</CardTitle>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-1 sm:space-y-0 text-xs sm:text-sm text-muted-foreground">
                     <div className="flex items-center space-x-1">
                       <Calendar className="h-3 w-3" />
                       <span>{sheet.serviceDate}</span>
@@ -272,15 +275,15 @@ export function RunSheetManagement() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
-                <Badge variant="outline" className={getStatusColor(sheet.status)}>
+                <Badge variant="outline" className={`${getStatusColor(sheet.status)} text-xs`}>
                   {sheet.status}
                 </Badge>
-                <Badge variant="outline" className={getCategoryColor(sheet.category)}>
+                <Badge variant="outline" className={`${getCategoryColor(sheet.category)} text-xs`}>
                   {sheet.category.replace("-", " ")}
                 </Badge>
               </div>
 
-              <div className="space-y-2 text-sm">
+              <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">Items:</span>
                   <span>{sheet.itemCount}</span>
@@ -290,16 +293,16 @@ export function RunSheetManagement() {
                   <span>{sheet.estimatedDuration}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground">Created by:</span>
-                  <span>{sheet.createdBy}</span>
+                  <span className="text-muted-foreground">Creator:</span>
+                  <span className="truncate ml-2">{sheet.createdBy}</span>
                 </div>
               </div>
 
               <div>
-                <p className="text-sm text-muted-foreground mb-2">Shared with:</p>
+                <p className="text-xs sm:text-sm text-muted-foreground mb-2">Shared with:</p>
                 <div className="flex items-center space-x-2">
                   {sheet.sharedWith.slice(0, 3).map((person, index) => (
-                    <Avatar key={index} className="h-6 w-6">
+                    <Avatar key={index} className="h-5 w-5 sm:h-6 sm:w-6">
                       <AvatarImage src="/placeholder.svg" alt={person} />
                       <AvatarFallback className="text-xs">
                         {person
@@ -310,28 +313,28 @@ export function RunSheetManagement() {
                     </Avatar>
                   ))}
                   {sheet.sharedWith.length > 3 && (
-                    <div className="h-6 w-6 rounded-full bg-muted flex items-center justify-center">
+                    <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-muted flex items-center justify-center">
                       <span className="text-xs">+{sheet.sharedWith.length - 3}</span>
                     </div>
                   )}
-                  <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                  <Button variant="ghost" size="sm" className="h-5 w-5 sm:h-6 sm:w-6 p-0">
                     <Users className="h-3 w-3" />
                   </Button>
                 </div>
               </div>
 
-              <div className="flex space-x-2">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                 <Button
                   variant="outline"
                   size="sm"
-                  className="flex-1 bg-transparent"
+                  className="flex-1 bg-transparent mobile-btn"
                   onClick={() => setEditingRunSheet(sheet.id)}
                 >
-                  <Edit className="mr-2 h-4 w-4" />
+                  <Edit className="mr-1 sm:mr-2 h-4 w-4" />
                   Edit
                 </Button>
-                <Button variant="outline" size="sm" className="flex-1 bg-transparent">
-                  <Share2 className="mr-2 h-4 w-4" />
+                <Button variant="outline" size="sm" className="flex-1 bg-transparent mobile-btn">
+                  <Share2 className="mr-1 sm:mr-2 h-4 w-4" />
                   Share
                 </Button>
               </div>
@@ -342,11 +345,12 @@ export function RunSheetManagement() {
 
       {filteredRunSheets.length === 0 && (
         <Card>
-          <CardContent className="flex flex-col items-center justify-center py-12">
-            <FileText className="h-12 w-12 text-muted-foreground mb-4" />
-            <p className="text-muted-foreground mb-4">No run sheets found matching your criteria</p>
+          <CardContent className="flex flex-col items-center justify-center py-8 sm:py-12">
+            <FileText className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mb-4" />
+            <p className="text-muted-foreground mb-4 text-center text-sm sm:text-base">No run sheets found matching your criteria</p>
             <Button
               variant="outline"
+              className="mobile-btn"
               onClick={() => {
                 setSearchTerm("")
                 setStatusFilter("all")

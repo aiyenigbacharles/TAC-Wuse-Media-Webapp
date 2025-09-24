@@ -81,12 +81,12 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
   const Sidebar = ({ className }: { className?: string }) => (
     <div className={cn("flex h-full flex-col", className)}>
-      <div className="flex h-16 items-center justify-between glow-border border-b px-4 sm:px-6 bg-card/50">
-        <h2 className="text-lg font-semibold text-foreground">Church Media</h2>
+      <div className="flex h-14 sm:h-16 items-center justify-between glow-border border-b px-3 sm:px-6 bg-card/50">
+        <h2 className="text-base sm:text-lg font-semibold text-foreground">Church Media</h2>
         <ThemeToggle />
       </div>
 
-      <div className="flex-1 overflow-auto py-4">
+      <div className="flex-1 overflow-auto py-3 sm:py-4">
         <nav className="space-y-1 px-2 sm:px-3">
           {navigation.map((item) => {
             const Icon = item.icon
@@ -97,7 +97,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 key={item.name}
                 variant={isActive ? "secondary" : "ghost"}
                 className={cn(
-                  "w-full justify-start transition-all duration-200 text-sm sm:text-base hover:scale-[1.02] active:scale-[0.98]",
+                  "w-full justify-start transition-all duration-200 text-sm hover:scale-[1.02] active:scale-[0.98] mobile-btn",
                   isActive &&
                     "bg-primary/10 text-primary hover:bg-primary/20 border-l-2 border-primary glow-border-strong",
                   "hover:bg-accent/80 hover:text-accent-foreground hover:shadow-md",
@@ -106,7 +106,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 onClick={() => handleNavigation(item.href)}
                 disabled={isItemLoading || isLoggingOut}
               >
-                {isItemLoading ? <Loader2 className="mr-3 h-4 w-4 animate-spin" /> : <Icon className="mr-3 h-4 w-4" />}
+                {isItemLoading ? <Loader2 className="mr-2 sm:mr-3 h-4 w-4 animate-spin" /> : <Icon className="mr-2 sm:mr-3 h-4 w-4" />}
                 {item.name}
               </Button>
             )
@@ -114,9 +114,9 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         </nav>
       </div>
 
-      <div className="glow-border border-t p-3 sm:p-4 bg-card/30">
-        <div className="flex items-center space-x-2 sm:space-x-3">
-          <Avatar className="h-8 w-8 ring-2 ring-primary/20 glow-border">
+      <div className="glow-border border-t p-2 sm:p-4 bg-card/30">
+        <div className="flex items-center space-x-2">
+          <Avatar className="h-7 w-7 sm:h-8 sm:w-8 ring-2 ring-primary/20 glow-border">
             <AvatarImage src={currentUser.avatar || "/placeholder.svg"} alt={currentUser.name} />
             <AvatarFallback className="bg-primary/10 text-primary text-sm">
               {currentUser.name
@@ -126,7 +126,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium truncate text-foreground">{currentUser.name}</p>
+            <p className="text-xs sm:text-sm font-medium truncate text-foreground">{currentUser.name}</p>
             <Badge variant="outline" className={cn("text-xs glow-border", getRoleBadgeColor(currentUser.role))}>
               {currentUser.role}
             </Badge>
@@ -134,11 +134,11 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           <Button
             variant="ghost"
             size="sm"
-            className="hover:bg-destructive/10 hover:text-destructive p-1 sm:p-2 glow-border-subtle"
+            className="hover:bg-destructive/10 hover:text-destructive p-1 glow-border-subtle"
             onClick={handleLogout}
             disabled={isLoggingOut}
           >
-            {isLoggingOut ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogOut className="h-4 w-4" />}
+            {isLoggingOut ? <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" /> : <LogOut className="h-3 w-3 sm:h-4 sm:w-4" />}
           </Button>
         </div>
       </div>
@@ -146,8 +146,8 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   )
 
   return (
-    <div className="flex h-screen bg-background">
-      <div className="hidden md:flex md:w-64 md:flex-col">
+    <div className="flex h-screen bg-background safe-area-inset">
+      <div className="hidden lg:flex lg:w-64 lg:flex-col">
         <div className="flex flex-col flex-1 glow-border border-r bg-sidebar card-gradient">
           <Sidebar />
         </div>
@@ -158,19 +158,19 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden fixed top-4 left-4 z-40 bg-card/80 backdrop-blur-sm glow-border"
+            className="lg:hidden fixed top-4 left-4 z-40 bg-card/80 backdrop-blur-sm glow-border mobile-btn"
             disabled={isLoggingOut}
           >
             <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="p-0 w-64 bg-sidebar card-gradient glow-border">
+        <SheetContent side="left" className="p-0 w-72 sm:w-64 bg-sidebar card-gradient glow-border">
           <Sidebar />
         </SheetContent>
       </Sheet>
 
       <div className="flex flex-1 flex-col overflow-hidden">
-        <main className="flex-1 overflow-auto bg-background p-4 sm:p-6">{children}</main>
+        <main className="flex-1 overflow-auto bg-background p-3 sm:p-6 pt-16 lg:pt-3">{children}</main>
       </div>
     </div>
   )

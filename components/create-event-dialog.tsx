@@ -93,20 +93,20 @@ export function CreateEventDialog({ children, open, onOpenChange }: CreateEventD
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto mx-4 sm:mx-auto">
         <DialogHeader>
-          <DialogTitle>Create New Event</DialogTitle>
-          <DialogDescription>Schedule a new service or event and assign team members to roles</DialogDescription>
+          <DialogTitle className="text-lg sm:text-xl">Create New Event</DialogTitle>
+          <DialogDescription className="text-sm">Schedule a new service or event and assign team members to roles</DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Event Details */}
-          <Card>
+          <Card className="mobile-card">
             <CardHeader>
-              <CardTitle className="text-lg">Event Details</CardTitle>
+              <CardTitle className="text-base sm:text-lg">Event Details</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+            <CardContent className="space-y-3 sm:space-y-4 mobile-form">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="title">Event Title</Label>
                   <Input
@@ -114,12 +114,13 @@ export function CreateEventDialog({ children, open, onOpenChange }: CreateEventD
                     placeholder="Sunday Morning Service"
                     value={eventData.title}
                     onChange={(e) => setEventData({ ...eventData, title: e.target.value })}
+                    className="mobile-btn"
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="type">Event Type</Label>
                   <Select value={eventData.type} onValueChange={(value) => setEventData({ ...eventData, type: value })}>
-                    <SelectTrigger>
+                    <SelectTrigger className="mobile-btn">
                       <SelectValue placeholder="Select type" />
                     </SelectTrigger>
                     <SelectContent>
@@ -132,7 +133,7 @@ export function CreateEventDialog({ children, open, onOpenChange }: CreateEventD
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="date">Date</Label>
                   <Input
@@ -140,6 +141,7 @@ export function CreateEventDialog({ children, open, onOpenChange }: CreateEventD
                     type="date"
                     value={eventData.date}
                     onChange={(e) => setEventData({ ...eventData, date: e.target.value })}
+                    className="mobile-btn"
                   />
                 </div>
                 <div className="space-y-2">
@@ -149,6 +151,7 @@ export function CreateEventDialog({ children, open, onOpenChange }: CreateEventD
                     type="time"
                     value={eventData.startTime}
                     onChange={(e) => setEventData({ ...eventData, startTime: e.target.value })}
+                    className="mobile-btn"
                   />
                 </div>
                 <div className="space-y-2">
@@ -158,6 +161,7 @@ export function CreateEventDialog({ children, open, onOpenChange }: CreateEventD
                     type="time"
                     value={eventData.endTime}
                     onChange={(e) => setEventData({ ...eventData, endTime: e.target.value })}
+                    className="mobile-btn"
                   />
                 </div>
               </div>
@@ -169,6 +173,7 @@ export function CreateEventDialog({ children, open, onOpenChange }: CreateEventD
                   placeholder="Main Sanctuary"
                   value={eventData.location}
                   onChange={(e) => setEventData({ ...eventData, location: e.target.value })}
+                  className="mobile-btn"
                 />
               </div>
 
@@ -179,37 +184,39 @@ export function CreateEventDialog({ children, open, onOpenChange }: CreateEventD
                   placeholder="Additional details about the event..."
                   value={eventData.description}
                   onChange={(e) => setEventData({ ...eventData, description: e.target.value })}
+                  className="mobile-btn"
                 />
               </div>
             </CardContent>
           </Card>
 
           {/* Team Assignments */}
-          <Card>
+          <Card className="mobile-card">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg flex items-center gap-2">
-                  <Users className="h-5 w-5" />
+                <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                  <Users className="h-4 w-4 sm:h-5 sm:w-5" />
                   Team Assignments
                 </CardTitle>
-                <Button variant="outline" size="sm" onClick={addAssignment}>
-                  <Plus className="mr-2 h-4 w-4" />
-                  Add Role
+                <Button variant="outline" size="sm" onClick={addAssignment} className="mobile-btn text-xs">
+                  <Plus className="mr-1 sm:mr-2 h-4 w-4" />
+                  <span className="hidden sm:inline">Add Role</span>
+                  <span className="sm:hidden">Add</span>
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-2 sm:space-y-3">
               {assignments.length === 0 ? (
-                <div className="text-center py-8 text-muted-foreground">
-                  <Users className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                  <p>No assignments yet. Click "Add Role" to start assigning team members.</p>
+                <div className="text-center py-6 sm:py-8 text-muted-foreground">
+                  <Users className="h-8 w-8 sm:h-12 sm:w-12 mx-auto mb-4 opacity-50" />
+                  <p className="text-sm">No assignments yet. Click "Add Role" to start assigning team members.</p>
                 </div>
               ) : (
                 assignments.map((assignment, index) => (
-                  <div key={index} className="flex items-center gap-3 p-3 border rounded-lg">
+                  <div key={index} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3 border rounded-lg space-y-2 sm:space-y-0">
                     <div className="flex-1">
                       <Select value={assignment.role} onValueChange={(value) => updateAssignment(index, "role", value)}>
-                        <SelectTrigger>
+                        <SelectTrigger className="mobile-btn">
                           <SelectValue placeholder="Select role" />
                         </SelectTrigger>
                         <SelectContent>
@@ -226,7 +233,7 @@ export function CreateEventDialog({ children, open, onOpenChange }: CreateEventD
                         value={assignment.assignee || ""}
                         onValueChange={(value) => updateAssignment(index, "assignee", value)}
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="mobile-btn">
                           <SelectValue placeholder="Assign to..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -242,6 +249,7 @@ export function CreateEventDialog({ children, open, onOpenChange }: CreateEventD
                     <Button
                       variant="ghost"
                       size="sm"
+                      className="mobile-btn self-end sm:self-center"
                       onClick={() => removeAssignment(index)}
                       className="text-destructive hover:text-destructive"
                     >
@@ -254,11 +262,11 @@ export function CreateEventDialog({ children, open, onOpenChange }: CreateEventD
           </Card>
         </div>
 
-        <div className="flex justify-end space-x-2 pt-4">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+        <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2 pt-4">
+          <Button variant="outline" onClick={() => onOpenChange(false)} className="mobile-btn">
             Cancel
           </Button>
-          <Button onClick={handleSubmit}>Create Event</Button>
+          <Button onClick={handleSubmit} className="mobile-btn">Create Event</Button>
         </div>
       </DialogContent>
     </Dialog>

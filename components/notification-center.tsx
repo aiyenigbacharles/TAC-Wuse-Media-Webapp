@@ -119,10 +119,10 @@ export function NotificationCenter({ open, onOpenChange }: NotificationCenterPro
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full sm:max-w-md">
+      <SheetContent className="w-full sm:max-w-md" side="right">
         <SheetHeader>
-          <SheetTitle className="flex items-center gap-2">
-            <Bell className="h-5 w-5" />
+          <SheetTitle className="flex items-center gap-2 text-lg sm:text-xl">
+            <Bell className="h-4 w-4 sm:h-5 sm:w-5" />
             Notifications
             {unreadCount > 0 && (
               <Badge variant="destructive" className="text-xs">
@@ -130,31 +130,32 @@ export function NotificationCenter({ open, onOpenChange }: NotificationCenterPro
               </Badge>
             )}
           </SheetTitle>
-          <SheetDescription>Stay updated with the latest announcements and reminders</SheetDescription>
+          <SheetDescription className="text-sm">Stay updated with the latest announcements and reminders</SheetDescription>
         </SheetHeader>
 
-        <div className="mt-6 space-y-4">
+        <div className="mt-4 sm:mt-6 space-y-3 sm:space-y-4">
           {/* Quick Actions */}
           <div className="flex items-center justify-between">
-            <Button variant="outline" size="sm" onClick={markAllAsRead}>
-              <CheckCheck className="mr-2 h-4 w-4" />
-              Mark All Read
+            <Button variant="outline" size="sm" onClick={markAllAsRead} className="mobile-btn text-xs">
+              <CheckCheck className="mr-1 sm:mr-2 h-4 w-4" />
+              <span className="hidden sm:inline">Mark All Read</span>
+              <span className="sm:hidden">Mark Read</span>
             </Button>
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" className="mobile-btn">
               <Settings className="h-4 w-4" />
             </Button>
           </div>
 
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-4 h-8 sm:h-9">
               <TabsTrigger value="all" className="text-xs">
                 All
               </TabsTrigger>
               <TabsTrigger value="unread" className="text-xs">
                 Unread
                 {unreadCount > 0 && (
-                  <Badge variant="secondary" className="ml-1 text-xs">
+                  <Badge variant="secondary" className="ml-0.5 sm:ml-1 text-xs">
                     {unreadCount}
                   </Badge>
                 )}
@@ -168,7 +169,7 @@ export function NotificationCenter({ open, onOpenChange }: NotificationCenterPro
             </TabsList>
 
             <TabsContent value={activeTab} className="mt-4">
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {filteredNotifications.map((notification) => {
                   const NotificationIcon = getNotificationIcon(notification.type)
                   return (
@@ -176,31 +177,31 @@ export function NotificationCenter({ open, onOpenChange }: NotificationCenterPro
                       key={notification.id}
                       className={`cursor-pointer transition-colors hover:bg-accent/50 ${
                         !notification.isRead ? "border-primary/50 bg-primary/5" : ""
-                      }`}
+                      } mobile-card`}
                       onClick={() => markAsRead(notification.id)}
                     >
-                      <CardContent className="p-4">
-                        <div className="flex items-start space-x-3">
+                      <CardContent className="p-3 sm:p-4">
+                        <div className="flex items-start space-x-2 sm:space-x-3">
                           <div className="flex-shrink-0">
-                            <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
-                              <NotificationIcon className="h-4 w-4" />
+                            <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-muted flex items-center justify-center">
+                              <NotificationIcon className="h-3 w-3 sm:h-4 sm:w-4" />
                             </div>
                           </div>
 
-                          <div className="flex-1 space-y-1">
+                          <div className="flex-1 space-y-1 min-w-0">
                             <div className="flex items-center justify-between">
-                              <p className="text-sm font-medium line-clamp-1">{notification.title}</p>
+                              <p className="text-xs sm:text-sm font-medium line-clamp-1 flex-1">{notification.title}</p>
                               {!notification.isRead && (
-                                <div className="h-2 w-2 bg-primary rounded-full flex-shrink-0" />
+                                <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 bg-primary rounded-full flex-shrink-0 ml-2" />
                               )}
                             </div>
 
                             <p className="text-xs text-muted-foreground line-clamp-2">{notification.message}</p>
 
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-2">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-1 sm:space-y-0">
+                              <div className="flex items-center space-x-1 sm:space-x-2">
                                 {notification.author !== "System" && (
-                                  <Avatar className="h-4 w-4">
+                                  <Avatar className="h-3 w-3 sm:h-4 sm:w-4">
                                     <AvatarImage src="/placeholder.svg" alt={notification.author} />
                                     <AvatarFallback className="text-xs">
                                       {notification.author
@@ -210,10 +211,10 @@ export function NotificationCenter({ open, onOpenChange }: NotificationCenterPro
                                     </AvatarFallback>
                                   </Avatar>
                                 )}
-                                <span className="text-xs text-muted-foreground">{notification.author}</span>
+                                <span className="text-xs text-muted-foreground truncate">{notification.author}</span>
                               </div>
 
-                              <div className="flex items-center space-x-2">
+                              <div className="flex items-center space-x-1 sm:space-x-2">
                                 <Badge
                                   variant="outline"
                                   className={`text-xs ${getPriorityColor(notification.priority)}`}
@@ -235,8 +236,8 @@ export function NotificationCenter({ open, onOpenChange }: NotificationCenterPro
 
               {filteredNotifications.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-12">
-                  <Bell className="h-12 w-12 text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground text-center">
+                  <Bell className="h-8 w-8 sm:h-12 sm:w-12 text-muted-foreground mb-4" />
+                  <p className="text-muted-foreground text-center text-sm">
                     {activeTab === "unread" ? "No unread notifications" : "No notifications found"}
                   </p>
                 </div>

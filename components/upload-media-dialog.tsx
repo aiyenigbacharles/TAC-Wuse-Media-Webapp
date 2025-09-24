@@ -139,13 +139,13 @@ export function UploadMediaDialog({ children, open, onOpenChange }: UploadMediaD
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto mx-4 sm:mx-auto">
         <DialogHeader>
-          <DialogTitle>Upload Media Files</DialogTitle>
-          <DialogDescription>Upload images, videos, audio files, and documents to your media library</DialogDescription>
+          <DialogTitle className="text-lg sm:text-xl">Upload Media Files</DialogTitle>
+          <DialogDescription className="text-sm">Upload images, videos, audio files, and documents to your media library</DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* File Drop Zone */}
           <Card
             className={`border-2 border-dashed transition-colors ${
@@ -156,10 +156,10 @@ export function UploadMediaDialog({ children, open, onOpenChange }: UploadMediaD
             onDragOver={handleDrag}
             onDrop={handleDrop}
           >
-            <CardContent className="flex flex-col items-center justify-center py-12">
-              <Upload className="h-12 w-12 text-muted-foreground mb-4" />
-              <p className="text-lg font-medium mb-2">Drop files here or click to browse</p>
-              <p className="text-sm text-muted-foreground mb-4">
+            <CardContent className="flex flex-col items-center justify-center py-8 sm:py-12">
+              <Upload className="h-8 w-8 sm:h-12 sm:w-12 text-muted-foreground mb-4" />
+              <p className="text-base sm:text-lg font-medium mb-2 text-center">Drop files here or click to browse</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-4 text-center">
                 Supports images, videos, audio, and documents up to 50MB each
               </p>
               <Input
@@ -171,8 +171,8 @@ export function UploadMediaDialog({ children, open, onOpenChange }: UploadMediaD
                 id="file-upload"
               />
               <Label htmlFor="file-upload" asChild>
-                <Button variant="outline">
-                  <Upload className="mr-2 h-4 w-4" />
+                <Button variant="outline" className="mobile-btn">
+                  <Upload className="mr-1 sm:mr-2 h-4 w-4" />
                   Choose Files
                 </Button>
               </Label>
@@ -182,41 +182,42 @@ export function UploadMediaDialog({ children, open, onOpenChange }: UploadMediaD
           {/* File List */}
           {files.length > 0 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-medium">Files to Upload ({files.length})</h3>
+              <h3 className="text-base sm:text-lg font-medium">Files to Upload ({files.length})</h3>
               <div className="space-y-4">
                 {files.map((fileUpload, index) => {
                   const FileIcon = getFileIcon(fileUpload.file.type)
                   return (
-                    <Card key={index}>
-                      <CardContent className="p-4">
-                        <div className="flex items-start space-x-4">
+                    <Card key={index} className="mobile-card">
+                      <CardContent className="p-3 sm:p-4">
+                        <div className="flex items-start space-x-3 sm:space-x-4">
                           {/* File Preview/Icon */}
                           <div className="flex-shrink-0">
                             {fileUpload.preview ? (
                               <img
                                 src={fileUpload.preview || "/placeholder.svg"}
                                 alt={fileUpload.name}
-                                className="h-16 w-16 object-cover rounded-lg"
+                                className="h-12 w-12 sm:h-16 sm:w-16 object-cover rounded-lg mobile-img"
                               />
                             ) : (
-                              <div className="h-16 w-16 bg-muted rounded-lg flex items-center justify-center">
-                                <FileIcon className="h-8 w-8 text-muted-foreground" />
+                              <div className="h-12 w-12 sm:h-16 sm:w-16 bg-muted rounded-lg flex items-center justify-center">
+                                <FileIcon className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
                               </div>
                             )}
                           </div>
 
                           {/* File Details */}
-                          <div className="flex-1 space-y-3">
+                          <div className="flex-1 space-y-2 sm:space-y-3 min-w-0">
                             <div className="flex items-center justify-between">
                               <div>
-                                <p className="font-medium">{fileUpload.file.name}</p>
-                                <p className="text-sm text-muted-foreground">
+                                <p className="font-medium text-sm sm:text-base truncate">{fileUpload.file.name}</p>
+                                <p className="text-xs sm:text-sm text-muted-foreground">
                                   {getFileType(fileUpload.file.type)} • {formatFileSize(fileUpload.file.size)}
                                 </p>
                               </div>
                               <Button
                                 variant="ghost"
                                 size="sm"
+                                className="mobile-btn"
                                 onClick={() => removeFile(index)}
                                 className="text-destructive hover:text-destructive"
                               >
@@ -224,13 +225,14 @@ export function UploadMediaDialog({ children, open, onOpenChange }: UploadMediaD
                               </Button>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                               <div className="space-y-2">
                                 <Label htmlFor={`name-${index}`}>Display Name</Label>
                                 <Input
                                   id={`name-${index}`}
                                   value={fileUpload.name}
                                   onChange={(e) => updateFile(index, { name: e.target.value })}
+                                  className="mobile-btn"
                                 />
                               </div>
                               <div className="space-y-2">
@@ -239,7 +241,7 @@ export function UploadMediaDialog({ children, open, onOpenChange }: UploadMediaD
                                   value={fileUpload.category}
                                   onValueChange={(value) => updateFile(index, { category: value })}
                                 >
-                                  <SelectTrigger>
+                                  <SelectTrigger className="mobile-btn">
                                     <SelectValue />
                                   </SelectTrigger>
                                   <SelectContent>
@@ -274,6 +276,7 @@ export function UploadMediaDialog({ children, open, onOpenChange }: UploadMediaD
                               <div className="flex space-x-2">
                                 <Input
                                   placeholder="Add tag..."
+                                  className="mobile-btn"
                                   value={newTag}
                                   onChange={(e) => setNewTag(e.target.value)}
                                   onKeyPress={(e) => {
@@ -287,6 +290,7 @@ export function UploadMediaDialog({ children, open, onOpenChange }: UploadMediaD
                                 <Button
                                   variant="outline"
                                   size="sm"
+                                  className="mobile-btn"
                                   onClick={() => {
                                     addTag(index, newTag)
                                     setNewTag("")
@@ -305,6 +309,7 @@ export function UploadMediaDialog({ children, open, onOpenChange }: UploadMediaD
                                 value={fileUpload.description}
                                 onChange={(e) => updateFile(index, { description: e.target.value })}
                                 rows={2}
+                                className="mobile-btn"
                               />
                             </div>
                           </div>
@@ -318,11 +323,11 @@ export function UploadMediaDialog({ children, open, onOpenChange }: UploadMediaD
           )}
         </div>
 
-        <div className="flex justify-end space-x-2 pt-4">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+        <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2 pt-4">
+          <Button variant="outline" onClick={() => onOpenChange(false)} className="mobile-btn">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} disabled={files.length === 0}>
+          <Button onClick={handleSubmit} disabled={files.length === 0} className="mobile-btn">
             Upload {files.length} {files.length === 1 ? "File" : "Files"}
           </Button>
         </div>

@@ -154,119 +154,125 @@ export function AnnouncementManagement() {
   })
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-balance">Announcements</h1>
-          <p className="text-muted-foreground">Keep your team informed with important updates</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-balance">Announcements</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">Keep your team informed with important updates</p>
         </div>
-        <div className="flex items-center space-x-2">
-          <Button variant="outline" onClick={() => setShowNotifications(true)}>
-            <Bell className="mr-2 h-4 w-4" />
-            Notifications
+        <div className="flex items-center space-x-1 sm:space-x-2">
+          <Button variant="outline" onClick={() => setShowNotifications(true)} className="mobile-btn">
+            <Bell className="mr-1 sm:mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Notifications</span>
+            <span className="sm:hidden">Alerts</span>
           </Button>
           <CreateAnnouncementDialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-            <Button>
-              <Plus className="mr-2 h-4 w-4" />
-              New Announcement
+            <Button className="mobile-btn">
+              <Plus className="mr-1 sm:mr-2 h-4 w-4" />
+              <span className="hidden sm:inline">New Announcement</span>
+              <span className="sm:hidden">New</span>
             </Button>
           </CreateAnnouncementDialog>
         </div>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Announcements</CardTitle>
-            <MessageSquare className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2 p-3 sm:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Total Announcements</CardTitle>
+            <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{announcements.length}</div>
+          <CardContent className="p-3 sm:p-6 pt-0">
+            <div className="text-xl sm:text-2xl font-bold">{announcements.length}</div>
             <p className="text-xs text-muted-foreground">All time</p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">High Priority</CardTitle>
-            <MessageSquare className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2 p-3 sm:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">High Priority</CardTitle>
+            <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{announcements.filter((a) => a.priority === "high").length}</div>
+          <CardContent className="p-3 sm:p-6 pt-0">
+            <div className="text-xl sm:text-2xl font-bold">{announcements.filter((a) => a.priority === "high").length}</div>
             <p className="text-xs text-muted-foreground">Urgent items</p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Pinned</CardTitle>
-            <Pin className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2 p-3 sm:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Pinned</CardTitle>
+            <Pin className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{announcements.filter((a) => a.isPinned).length}</div>
+          <CardContent className="p-3 sm:p-6 pt-0">
+            <div className="text-xl sm:text-2xl font-bold">{announcements.filter((a) => a.isPinned).length}</div>
             <p className="text-xs text-muted-foreground">Important notices</p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Team Members</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2 p-3 sm:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Team Members</CardTitle>
+            <Users className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">12</div>
+          <CardContent className="p-3 sm:p-6 pt-0">
+            <div className="text-xl sm:text-2xl font-bold">12</div>
             <p className="text-xs text-muted-foreground">Active recipients</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col gap-3 sm:gap-4">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search announcements..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10"
+            className="pl-10 mobile-btn"
           />
         </div>
-        <Select value={priorityFilter} onValueChange={setPriorityFilter}>
-          <SelectTrigger className="w-full sm:w-48">
-            <SelectValue placeholder="All Priorities" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Priorities</SelectItem>
-            <SelectItem value="high">High Priority</SelectItem>
-            <SelectItem value="medium">Medium Priority</SelectItem>
-            <SelectItem value="low">Low Priority</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-          <SelectTrigger className="w-full sm:w-48">
-            <SelectValue placeholder="All Categories" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
-            <SelectItem value="youth">Youth</SelectItem>
-            <SelectItem value="training">Training</SelectItem>
-            <SelectItem value="schedule">Schedule</SelectItem>
-            <SelectItem value="maintenance">Maintenance</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:gap-4">
+          <Select value={priorityFilter} onValueChange={setPriorityFilter}>
+            <SelectTrigger className="w-full sm:w-48 mobile-btn">
+              <SelectValue placeholder="All Priorities" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Priorities</SelectItem>
+              <SelectItem value="high">High Priority</SelectItem>
+              <SelectItem value="medium">Medium Priority</SelectItem>
+              <SelectItem value="low">Low Priority</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+            <SelectTrigger className="w-full sm:w-48 mobile-btn">
+              <SelectValue placeholder="All Categories" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Categories</SelectItem>
+              <SelectItem value="youth">Youth</SelectItem>
+              <SelectItem value="training">Training</SelectItem>
+              <SelectItem value="schedule">Schedule</SelectItem>
+              <SelectItem value="maintenance">Maintenance</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       {/* Announcements List */}
       <div className="space-y-4">
         {sortedAnnouncements.map((announcement) => (
-          <Card key={announcement.id} className={`${announcement.isPinned ? "border-primary/50 bg-primary/5" : ""}`}>
+          <Card key={announcement.id} className={`${announcement.isPinned ? "border-primary/50 bg-primary/5" : ""} mobile-card`}>
             <CardHeader className="pb-3">
               <div className="flex items-start justify-between">
                 <div className="space-y-2 flex-1">
                   <div className="flex items-center space-x-2">
                     {announcement.isPinned && <Pin className="h-4 w-4 text-primary" />}
-                    <CardTitle className="text-lg">{announcement.title}</CardTitle>
+                    <CardTitle className="text-base sm:text-lg line-clamp-2">{announcement.title}</CardTitle>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-2">
                     <Badge variant="outline" className={`text-xs ${getPriorityColor(announcement.priority)}`}>
                       {announcement.priority}
                     </Badge>
@@ -274,9 +280,9 @@ export function AnnouncementManagement() {
                       {announcement.category}
                     </Badge>
                   </div>
-                  <div className="flex items-center space-x-4 text-sm text-muted-foreground">
-                    <div className="flex items-center space-x-2">
-                      <Avatar className="h-5 w-5">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-1 sm:space-y-0 text-xs sm:text-sm text-muted-foreground">
+                    <div className="flex items-center space-x-1 sm:space-x-2">
+                      <Avatar className="h-4 w-4 sm:h-5 sm:w-5">
                         <AvatarImage src="/placeholder.svg" alt={announcement.author} />
                         <AvatarFallback className="text-xs">
                           {announcement.author
@@ -285,7 +291,7 @@ export function AnnouncementManagement() {
                             .join("")}
                         </AvatarFallback>
                       </Avatar>
-                      <span>{announcement.author}</span>
+                      <span className="truncate">{announcement.author}</span>
                       <Badge variant="secondary" className="text-xs">
                         {announcement.authorRole}
                       </Badge>
@@ -298,7 +304,7 @@ export function AnnouncementManagement() {
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" className="mobile-btn">
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
@@ -336,8 +342,8 @@ export function AnnouncementManagement() {
                 </div>
               )}
 
-              <div className="flex items-center justify-between pt-2 border-t">
-                <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-2 border-t space-y-2 sm:space-y-0">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-1 sm:space-y-0 text-xs sm:text-sm text-muted-foreground">
                   <div className="flex items-center space-x-1">
                     <Eye className="h-3 w-3" />
                     <span>
@@ -350,9 +356,9 @@ export function AnnouncementManagement() {
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-1 sm:space-x-2">
                   {announcement.readBy.slice(0, 3).map((person, index) => (
-                    <Avatar key={index} className="h-6 w-6">
+                    <Avatar key={index} className="h-5 w-5 sm:h-6 sm:w-6">
                       <AvatarImage src="/placeholder.svg" alt={person} />
                       <AvatarFallback className="text-xs">
                         {person
@@ -363,7 +369,7 @@ export function AnnouncementManagement() {
                     </Avatar>
                   ))}
                   {announcement.readBy.length > 3 && (
-                    <div className="h-6 w-6 rounded-full bg-muted flex items-center justify-center">
+                    <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-muted flex items-center justify-center">
                       <span className="text-xs">+{announcement.readBy.length - 3}</span>
                     </div>
                   )}

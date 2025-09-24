@@ -101,22 +101,22 @@ export function CreateAnnouncementDialog({ children, open, onOpenChange }: Creat
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto mx-4 sm:mx-auto">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <MessageSquare className="h-5 w-5" />
+          <DialogTitle className="flex items-center gap-2 text-lg sm:text-xl">
+            <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5" />
             Create New Announcement
           </DialogTitle>
-          <DialogDescription>Share important updates and information with your team</DialogDescription>
+          <DialogDescription className="text-sm">Share important updates and information with your team</DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Basic Information */}
-          <Card>
+          <Card className="mobile-card">
             <CardHeader>
-              <CardTitle className="text-lg">Announcement Details</CardTitle>
+              <CardTitle className="text-base sm:text-lg">Announcement Details</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-3 sm:space-y-4 mobile-form">
               <div className="space-y-2">
                 <Label htmlFor="title">Title</Label>
                 <Input
@@ -124,6 +124,7 @@ export function CreateAnnouncementDialog({ children, open, onOpenChange }: Creat
                   placeholder="Enter announcement title..."
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  className="mobile-btn"
                 />
               </div>
 
@@ -134,18 +135,19 @@ export function CreateAnnouncementDialog({ children, open, onOpenChange }: Creat
                   placeholder="Write your announcement message..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows={4}
+                  rows={3}
+                  className="mobile-btn"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="priority">Priority</Label>
                   <Select
                     value={formData.priority}
                     onValueChange={(value) => setFormData({ ...formData, priority: value })}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="mobile-btn">
                       <SelectValue placeholder="Select priority" />
                     </SelectTrigger>
                     <SelectContent>
@@ -161,7 +163,7 @@ export function CreateAnnouncementDialog({ children, open, onOpenChange }: Creat
                     value={formData.category}
                     onValueChange={(value) => setFormData({ ...formData, category: value })}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="mobile-btn">
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
@@ -195,6 +197,7 @@ export function CreateAnnouncementDialog({ children, open, onOpenChange }: Creat
                 <div className="flex space-x-2">
                   <Input
                     placeholder="Add tag..."
+                    className="mobile-btn"
                     value={newTag}
                     onChange={(e) => setNewTag(e.target.value)}
                     onKeyPress={(e) => {
@@ -213,33 +216,33 @@ export function CreateAnnouncementDialog({ children, open, onOpenChange }: Creat
           </Card>
 
           {/* Recipients */}
-          <Card>
+          <Card className="mobile-card">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg flex items-center gap-2">
-                  <Users className="h-5 w-5" />
+                <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                  <Users className="h-4 w-4 sm:h-5 sm:w-5" />
                   Recipients ({selectedMembers.length} selected)
                 </CardTitle>
-                <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" onClick={selectAllMembers}>
+                <div className="flex space-x-1 sm:space-x-2">
+                  <Button variant="outline" size="sm" onClick={selectAllMembers} className="mobile-btn text-xs">
                     Select All
                   </Button>
-                  <Button variant="outline" size="sm" onClick={clearAllMembers}>
+                  <Button variant="outline" size="sm" onClick={clearAllMembers} className="mobile-btn text-xs">
                     Clear All
                   </Button>
                 </div>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {teamMembers.map((member) => (
-                  <div key={member.id} className="flex items-center space-x-3 p-2 border rounded-lg">
+                  <div key={member.id} className="flex items-center space-x-2 sm:space-x-3 p-2 border rounded-lg">
                     <Checkbox
                       checked={selectedMembers.includes(member.id)}
                       onCheckedChange={() => handleMemberToggle(member.id)}
                     />
                     <div className="flex-1">
-                      <p className="text-sm font-medium">{member.name}</p>
+                      <p className="text-xs sm:text-sm font-medium">{member.name}</p>
                       <p className="text-xs text-muted-foreground">{member.role}</p>
                     </div>
                   </div>
@@ -249,11 +252,11 @@ export function CreateAnnouncementDialog({ children, open, onOpenChange }: Creat
           </Card>
 
           {/* Options */}
-          <Card>
+          <Card className="mobile-card">
             <CardHeader>
-              <CardTitle className="text-lg">Options</CardTitle>
+              <CardTitle className="text-base sm:text-lg">Options</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-3 sm:space-y-4 mobile-form">
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="pinned"
@@ -279,19 +282,21 @@ export function CreateAnnouncementDialog({ children, open, onOpenChange }: Creat
                   type="datetime-local"
                   value={formData.scheduleFor}
                   onChange={(e) => setFormData({ ...formData, scheduleFor: e.target.value })}
+                  className="mobile-btn"
                 />
               </div>
             </CardContent>
           </Card>
         </div>
 
-        <div className="flex justify-end space-x-2 pt-4">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+        <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2 pt-4">
+          <Button variant="outline" onClick={() => onOpenChange(false)} className="mobile-btn">
             Cancel
           </Button>
           <Button
             onClick={handleSubmit}
             disabled={!formData.title || !formData.message || selectedMembers.length === 0}
+            className="mobile-btn"
           >
             <Send className="mr-2 h-4 w-4" />
             {formData.scheduleFor ? "Schedule" : "Send"} Announcement
