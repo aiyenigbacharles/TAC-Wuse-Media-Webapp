@@ -3,7 +3,7 @@
 import { createClient } from "@/lib/supabase/client"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Loader2 } from "lucide-react"
+import { Loader as Loader2 } from "lucide-react"
 import { AuthForm } from "@/components/auth-form"
 
 export default function AuthPage() {

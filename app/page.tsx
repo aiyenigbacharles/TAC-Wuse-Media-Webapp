@@ -3,21 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import {
-  Calendar,
-  FileImage,
-  FileText,
-  MessageSquare,
-  Users,
-  ArrowRight,
-  CheckCircle,
-  Shield,
-  Loader2,
-  ChevronLeft,
-  ChevronRight,
-  Play,
-  Star,
-} from "lucide-react"
+import { Calendar, FileImage, FileText, MessageSquare, Users, ArrowRight, CircleCheck as CheckCircle, Shield, Loader as Loader2, ChevronLeft, ChevronRight, Play, Star } from "lucide-react"
 import Link from "next/link"
 import { useState, useEffect } from "react"
 
