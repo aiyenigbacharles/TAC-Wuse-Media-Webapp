@@ -39,10 +39,10 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="hero-gradient safe-area-inset">
+    <div className="space-background">
       <div className="text-center pt-6 sm:pt-8 pb-4 px-4">
-        <h1 className="text-2xl sm:text-3xl font-bold text-balance mb-2 text-foreground">Church Media System</h1>
-        <p className="text-muted-foreground text-balance text-sm sm:text-base">Sign in to access your media dashboard</p>
+        <h1 className="text-3xl font-bold mb-2 text-white">Church Media System</h1>
+        <p className="text-gray-300 text-base">Sign in to access your media dashboard</p>
       </div>
       <AuthForm />
     </div>

@@ -71,11 +71,13 @@ export function AuthForm() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4 safe-area-inset">
+    <div className="min-h-screen flex items-center justify-center p-4 relative">
+      <div className="absolute top-20 right-20 w-64 h-64 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-full blur-3xl float-animation" />
+      <div className="absolute bottom-20 left-20 w-48 h-48 bg-gradient-to-r from-purple-500/20 to-pink-600/20 rounded-full blur-3xl float-animation" style={{ animationDelay: '3s' }} />
       <div className="w-full max-w-md">
         <div className="mb-4 sm:mb-6">
           <Link href="/">
-            <Button variant="ghost" size="sm" className="text-foreground hover:bg-white/10 glow-border-subtle mb-4 mobile-btn">
+            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 border border-white/20 mb-4 mobile-btn">
               <ArrowLeft className="w-4 h-4 mr-1 sm:mr-2" />
               <span className="hidden sm:inline">Back to Home</span>
               <span className="sm:hidden">Back</span>
@@ -83,16 +85,16 @@ export function AuthForm() {
           </Link>
         </div>
 
-        <Card className="border-white/10 shadow-xl shadow-black/20 bg-card/50 backdrop-blur-sm glow-border mobile-card">
+        <Card className="glass-card border-white/10 neon-border mobile-card relative z-10">
           <CardHeader className="space-y-1 text-center">
-            <CardTitle className="text-xl sm:text-2xl text-foreground">{isSignUp ? "Create Account" : "Welcome Back"}</CardTitle>
-            <CardDescription className="text-muted-foreground text-sm leading-relaxed">
+            <CardTitle className="text-2xl text-white">{isSignUp ? "Create Account" : "Welcome Back"}</CardTitle>
+            <CardDescription className="text-gray-300 text-sm leading-relaxed">
               {isSignUp ? "Create your account to get started" : "Sign in to access your church media dashboard"}
             </CardDescription>
           </CardHeader>
           <CardContent>
             {error && (
-              <div className="mb-4 p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm glow-border leading-relaxed">
+              <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm leading-relaxed">
                 {error}
               </div>
             )}
@@ -100,7 +102,7 @@ export function AuthForm() {
             <div className="space-y-4 mobile-form">
               {isSignUp && (
                 <div className="space-y-2">
-                  <Label htmlFor="fullName" className="text-foreground">
+                  <Label htmlFor="fullName" className="text-white">
                     Full Name
                   </Label>
                   <Input
@@ -110,12 +112,12 @@ export function AuthForm() {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     disabled={isLoading}
-                    className="bg-input border-white/20 text-foreground placeholder:text-muted-foreground glow-border focus:glow-border-strong mobile-btn"
+                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:border-blue-500/50 mobile-btn"
                   />
                 </div>
               )}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-foreground">
+                <Label htmlFor="email" className="text-white">
                   Email
                 </Label>
                 <Input
@@ -125,11 +127,11 @@ export function AuthForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={isLoading}
-                  className="bg-input border-white/20 text-foreground placeholder:text-muted-foreground glow-border focus:glow-border-strong mobile-btn"
+                  className="bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:border-blue-500/50 mobile-btn"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-foreground">
+                <Label htmlFor="password" className="text-white">
                   Password
                 </Label>
                 <Input
@@ -138,12 +140,12 @@ export function AuthForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
-                  className="bg-input border-white/20 text-foreground glow-border focus:glow-border-strong mobile-btn"
+                  className="bg-white/5 border-white/20 text-white focus:border-blue-500/50 mobile-btn"
                 />
               </div>
               <div className="space-y-2">
                 <Button
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground glow-border mobile-btn"
+                  className="w-full neon-button text-white mobile-btn"
                   onClick={() => handleEmailAuth(isSignUp)}
                   disabled={isLoading}
                 >
@@ -152,7 +154,7 @@ export function AuthForm() {
                 </Button>
                 <Button
                   variant="ghost"
-                  className="w-full text-foreground hover:bg-white/10 mobile-btn text-sm"
+                  className="w-full text-white hover:bg-white/10 mobile-btn text-sm"
                   onClick={() => setIsSignUp(!isSignUp)}
                   disabled={isLoading}
                 >
